@@ -5,6 +5,11 @@ from .forms import TaskForm
 
 from .models import Task
 
+@require_GET
+def index(request):
+    tasks = Task.objects.all().order_by('-created_at')
+    return render(request, 'tasks/index.html', {'tasks': tasks})
+
 
 @require_GET
 def index(request):
